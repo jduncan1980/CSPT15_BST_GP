@@ -30,6 +30,34 @@ class TreeNode:
         self.left = left
         self.right = right
 
-def is_valid_BST(self, root):
-    # Your code here
-    pass
+    def is_valid_BST(self, root):
+        stack, in_order = [], float('-Infinity')
+        
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            
+            root = stack.pop()
+            
+            if root.value <= in_order:
+                return False
+            
+            in_order = root.value
+            root = root.right
+            
+        return True
+
+b1 = TreeNode(5)
+b1.left = TreeNode(3)
+b1.right = TreeNode(7)
+
+b2 = TreeNode(10)
+b2.left = TreeNode(2)
+b2.right = TreeNode(8)
+b2.right.left = TreeNode(6)
+b2.right.right = TreeNode(12)
+
+print(b1.is_valid_BST(b1))
+
+print(b2.is_valid_BST(b2))
